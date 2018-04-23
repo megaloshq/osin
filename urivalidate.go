@@ -18,10 +18,13 @@ func newUriValidationError(msg string, base string, redirect string) UriValidati
 	return UriValidationError(fmt.Sprintf("%s: %s / %s", msg, base, redirect))
 }
 
-// ValidateUriList validates that redirectUri is contained in baseUriList.
+// ValidateUriList default validate
+var ValidateUriList = ValidateUriListFn
+
+// ValidateUriListFn validates that redirectUri is contained in baseUriList.
 // baseUriList may be a string separated by separator.
 // If separator is blank, validate only 1 URI.
-func ValidateUriList(baseUriList string, redirectUri string, separator string) error {
+func ValidateUriListFn(baseUriList string, redirectUri string, separator string) error {
 	// make a list of uris
 	var slist []string
 	if separator != "" {
